@@ -1,0 +1,21 @@
+id: vc9Eiyv4g
+name: Books Listing
+description: Try books service
+
+trigger:
+  type: http
+  httpRequest:
+    url: http://books:8001/books
+    method: GET
+    headers:
+    - key: Content-Type
+      value: application/json
+
+specs:
+  - selector: span[name = "Tracetest trigger"]
+    assertions:
+    - tracetest.response.status = 200
+  
+  - selector: span[name = "Books List"]
+    assertions:
+    - tracetest.selected_spans.count = 1
