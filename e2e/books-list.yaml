@@ -19,3 +19,8 @@ specs:
   - selector: span[name = "Books List"]
     assertions:
     - tracetest.selected_spans.count = 1
+    - books.list.count = 3
+
+  - selector: span[name = "Books List"] span[name = "Availability Check"]
+    assertions:
+    - tracetest.selected_spans.count = 4
